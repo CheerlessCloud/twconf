@@ -12,27 +12,30 @@
     "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.5.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^4.0.0",
     "commitizen": "^2.9.6",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "lint-staged": "^3.5.0",
+    "mocha": "^3.4.2",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6"
   },
   "scripts": {
-    "test": "echo \"Someday I will create tests, but not now ...\" && exit 0",
-    "lint": "node_modules/.bin/eslint ./src",
-    "lint:fix": "node_modules/.bin/eslint --fix ./src",
+    "test": "mocha src/*.test.js --check-leaks --compilers js:babel-register",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
     "lint-staged": "lint-staged",
     "prebuild": "rimraf ./dist",
     "build": "babel -d ./dist -s --ingore *.test.js ./src",
-    "commit": "./node_modules/.bin/git-cz",
+    "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
-    "node": "^6.9.0"
+    "node": ">=6.9.0"
   },
   "config": {
     "commitizen": {
