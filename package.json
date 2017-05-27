@@ -1,0 +1,79 @@
+{
+  "name": "twconf",
+  "version": "0.0.0-development",
+  "description": "Module for validation config from environment variables",
+  "main": "dist/index.js",
+  "repository": "git@github.com:TeslaCtroitel/twconf.git",
+  "author": "EnRoute <nnsceg@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "commitizen": "^2.9.6",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "lint-staged": "^3.5.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^2.6.1",
+    "semantic-release": "^6.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Someday I will create tests, but not now ...\" && exit 0",
+    "lint": "node_modules/.bin/eslint ./src",
+    "lint:fix": "node_modules/.bin/eslint --fix ./src",
+    "lint-staged": "lint-staged",
+    "prebuild": "rimraf ./dist",
+    "build": "babel -d ./dist -s --ingore *.test.js ./src",
+    "commit": "./node_modules/.bin/git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "engines": {
+    "node": "^6.9.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "eslint-config-airbnb-base",
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module",
+      "allowImportExportEverywhere": false,
+      "codeFrame": false
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "strict": 0
+    }
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "lint"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "6.9"
+          }
+        }
+      ],
+      "stage-0"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email:
+    recipients:
+      - nnsceg@gmail.com
+    on_success: never
+    on_failure: always
+node_js:
+  - '7'
+  - '6'
+before_script:
+  - npm prune
+scripts:
+  - npm run tests
+  - npm run build
+after_success:
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
