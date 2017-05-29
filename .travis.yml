@@ -2,22 +2,36 @@ language: node_js
 cache:
   directories:
     - node_modules
-notifications:
-  email:
-    recipients:
-      - nnsceg@gmail.com
-    on_success: never
-    on_failure: always
 node_js:
   - '7'
   - '6'
-before_script:
-  - npm prune
-scripts:
-  - npm run tests
-  - npm run build
-after_success:
-  - npm run semantic-release
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+
+test:
+  on:
+    branches:
+      only:
+      - master
+      - development
+
+  before_script:
+    - npm prune
+  scripts:
+    - npm run test
+
+  notifications:
+    email:
+      recipients:
+        - nnsceg@gmail.com
+      on_success: never
+      on_failure: always
+
+deploy:
+  on:
+      branch: master
+  before_script:
+    - npm prune
+  scripts:
+    - npm run test
+    - npm run build
+  after_success:
+    - npm run semantic-release
