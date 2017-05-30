@@ -7,16 +7,6 @@ node_js:
   - '7'
   - '6'
 
-test:
-  provider: script
-  on:
-    branch: development
-
-  before_script:
-    - npm prune
-  scripts:
-    - npm run test
-
 deploy:
   notifications:
     email:
@@ -34,4 +24,4 @@ deploy:
     - npm run test
     - npm run build
   after_success:
-    - NPM_TOKEN=$NPM_TOKEN npm run semantic-release
+    - npm run semantic-release
