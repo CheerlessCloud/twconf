@@ -7,6 +7,14 @@ class ConfigFieldBaseType {
    * @type {function.<boolean>[]}
    */
   validators = [];
+
+  /**
+   * @type {{pre: function[], post: function[]}}
+   */
+  transformators = {
+    pre: [],
+    post: [],
+  };
 }
 
 export default ConfigFieldBaseType;
