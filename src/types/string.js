@@ -3,21 +3,21 @@ import ConfigFieldBaseType from './base';
 class StringType extends ConfigFieldBaseType {
   /**
    * String type
-   * @param  {number=} minLength
    * @param  {number=} maxLength
+   * @param  {number=} minLength
    * @param  {string[]=} allowed
    */
-  constructor(minLength, maxLength, allowed) {
+  constructor(maxLength, minLength, allowed) {
     super();
 
     this.validators.push(val => typeof val === 'string');
 
     if (minLength !== null && minLength !== undefined) {
-      this.validators.push(val => val.length > minLength);
+      this.validators.push(val => val.length >= minLength);
     }
 
     if (maxLength !== null && maxLength !== undefined) {
-      this.validators.push(val => val.length < maxLength);
+      this.validators.push(val => val.length <= maxLength);
     }
 
     if (allowed && allowed.length) {
