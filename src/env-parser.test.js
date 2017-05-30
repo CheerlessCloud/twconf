@@ -29,6 +29,16 @@ describe('env-parser', () => {
     }).not.to.throw();
   });
 
+  it('replace ":" symbol with "."', () => {
+    process.env = {
+      'REDIS:HASH-ALGO': 'testName',
+    };
+
+    expect(() => {
+      expect(envParser().has('redis.hashAlgo')).to.be.equal(true);
+    }).not.to.throw();
+  });
+
   it('flat keys', () => {
     process.env = {
       DATABASE_MONGODB_HOST: 'localhost',
