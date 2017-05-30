@@ -7,31 +7,31 @@ node_js:
   - '6'
 
 test:
+  provider: script
   on:
-    branches:
-      only:
-      - master
-      - development
+    branch: development
 
   before_script:
     - npm prune
   scripts:
     - npm run test
 
+deploy:
+  provider: script
   notifications:
     email:
       recipients:
         - nnsceg@gmail.com
       on_success: never
       on_failure: always
-
-deploy:
   on:
-      branch: master
+    tags: true
+    branch: master
+  skip_cleanup: true
   before_script:
     - npm prune
   scripts:
     - npm run test
     - npm run build
   after_success:
-    - npm run semantic-release
+    - NPM_TOKEN=$NPM_TOKEN npm run semantic-release
