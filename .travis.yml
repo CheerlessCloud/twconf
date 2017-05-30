@@ -8,6 +8,7 @@ node_js:
   - '6'
 
 deploy:
+  provider: script
   notifications:
     email:
       recipients:
