@@ -6,23 +6,19 @@ cache:
 node_js:
   - '7'
   - '6'
-
-deploy:
-  provider: script
-  notifications:
-    email:
-      recipients:
-        - nnsceg@gmail.com
-      on_success: never
-      on_failure: always
-  on:
-    tags: true
-    branch: master
-  skip_cleanup: true
-  before_script:
-    - npm prune
-  scripts:
-    - npm run test
-    - npm run build
-  after_success:
-    - npm run semantic-release
+notifications:
+  email:
+    recipients:
+      - nnsceg@gmail.com
+    on_success: never
+    on_failure: always
+branches:
+ except:
+   - /^v\d+\.\d+\.\d+$/
+before_script:
+  - npm prune
+scripts:
+  - npm run test
+  - npm run build
+after_success:
+  - npm run semantic-release
