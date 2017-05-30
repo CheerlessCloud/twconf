@@ -25,7 +25,7 @@
     "semantic-release": "^6.3.6"
   },
   "scripts": {
-    "test": "mocha src/*.test.js --check-leaks --compilers js:babel-register",
+    "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "lint-staged": "lint-staged",
