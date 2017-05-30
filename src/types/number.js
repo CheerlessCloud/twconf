@@ -1,6 +1,6 @@
-import TwConfFieldType from './base';
+import ConfigFieldBaseType from './base';
 
-export default class Number extends TwConfFieldType {
+class NumberType extends ConfigFieldBaseType {
   constructor(min, max) {
     super();
 
@@ -15,3 +15,6 @@ export default class Number extends TwConfFieldType {
     }
   }
 }
+
+export default NumberType;
+module.exports = NumberType;

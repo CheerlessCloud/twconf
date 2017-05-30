@@ -1,7 +1,7 @@
 import { isIP } from 'net';
-import TwConfFieldType from './base';
+import ConfigFieldBaseType from './base';
 
-export default class IPAddress extends TwConfFieldType {
+class IPAddressType extends ConfigFieldBaseType {
   constructor(version) {
     super();
 
@@ -19,3 +19,6 @@ export default class IPAddress extends TwConfFieldType {
     });
   }
 }
+
+export default IPAddressType;
+module.exports = IPAddressType;

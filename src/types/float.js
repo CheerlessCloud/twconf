@@ -2,7 +2,7 @@ import NumberType from './number';
 
 const { abs } = Math;
 
-export default class Float extends NumberType {
+class FloatType extends NumberType {
   constructor(min, max, precision) {
     super(min, max);
 
@@ -20,3 +20,6 @@ export default class Float extends NumberType {
     });
   }
 }
+
+export default FloatType;
+module.exports = FloatType;

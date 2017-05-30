@@ -1,6 +1,6 @@
-import TwConfFieldType from './base';
+import ConfigFieldBaseType from './base';
 
-export default class String extends TwConfFieldType {
+class StringType extends ConfigFieldBaseType {
   /**
    * String type
    * @param  {number=} minLength
@@ -25,3 +25,6 @@ export default class String extends TwConfFieldType {
     }
   }
 }
+
+export default StringType;
+module.exports = StringType;
