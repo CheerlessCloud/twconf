@@ -35,7 +35,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=6.0.0"
   },
   "config": {
     "commitizen": {
@@ -61,6 +61,9 @@
   "pre-commit": "lint-staged",
   "lint-staged": {
     "*.js": "lint"
+  },
+  "publishConfig": {
+    "tag": "canary"
   },
   "files": [
     "dist",
