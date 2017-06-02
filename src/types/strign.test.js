@@ -15,10 +15,11 @@ describe('string type', () => {
     const stringType = new StringType();
 
     stringType.validators.map(fn => expect(fn('some string')).to.be.true);
+    stringType.validators.map(fn => expect(fn({})).to.be.false);
   });
 
   it('check max validator', () => {
-    const stringType = new StringType(6);
+    const stringType = new StringType({ maxLength: 6 });
 
     expect(stringType.validators).to.be.have.length(2);
     expect(stringType.validators[1]('string')).to.be.equal(true);
@@ -26,7 +27,7 @@ describe('string type', () => {
   });
 
   it('check max and min validator', () => {
-    const stringType = new StringType(10, 2);
+    const stringType = new StringType({ maxLength: 10, minLength: 3 });
 
     expect(stringType.validators).to.be.have.length(3);
     expect(stringType.validators[1]('normal')).to.be.equal(true);
@@ -35,12 +36,22 @@ describe('string type', () => {
     expect(stringType.validators[2]('very big string')).to.be.equal(false);
   });
 
-  it('check allowed list validator', () => {
-    const stringType = new StringType(null, null, ['allow1', 'allow2']);
+  it('check allowed string list validator', () => {
+    const stringType = new StringType({ allowed: ['allow1', 'allow2'] });
 
-    expect(stringType.validators).to.be.have.length(2);
+    expect(stringType.validators).to.be.have.length(3);
     expect(stringType.validators[1]('allow1')).to.be.equal(true);
     expect(stringType.validators[1]('allow2')).to.be.equal(true);
     expect(stringType.validators[1]('disallow string')).to.be.equal(false);
+  });
+
+  it('check allowed regexp list validator', () => {
+    const stringType = new StringType({ allowed: [/^[A-Z]+$/, /^\d+$/] });
+
+    expect(stringType.validators).to.be.have.length(3);
+    expect(stringType.validators[2]('deny value')).to.be.equal(false);
+    expect(stringType.validators[2]('AZA')).to.be.equal(true);
+    expect(stringType.validators[2]('125')).to.be.equal(true);
+    expect(stringType.validators[2]('125abc')).to.be.equal(false);
   });
 });

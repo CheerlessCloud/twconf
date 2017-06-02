@@ -3,25 +3,46 @@ import ConfigFieldBaseType from './base';
 class StringType extends ConfigFieldBaseType {
   /**
    * String type
-   * @param  {number=} maxLength
-   * @param  {number=} minLength
-   * @param  {string[]=} allowed
+   * @param {object=} options
+   * @param {number=} options.maxLength
+   * @param {number=} options.minLength
+   * @param {(string|RegExp)[]=} options.allowed
    */
-  constructor(maxLength, minLength, allowed) {
+  constructor(options = {}) {
     super();
 
     this.validators.push(val => typeof val === 'string');
 
-    if (minLength !== null && minLength !== undefined) {
-      this.validators.push(val => val.length >= minLength);
+    if (options.minLength !== null && options.minLength !== undefined) {
+      this.validators.push(val => val.length >= options.minLength);
     }
 
-    if (maxLength !== null && maxLength !== undefined) {
-      this.validators.push(val => val.length <= maxLength);
+    if (options.maxLength !== null && options.maxLength !== undefined) {
+      this.validators.push(val => val.length <= options.maxLength);
     }
 
-    if (allowed && allowed.length) {
-      this.validators.push(val => allowed.includes(val));
+    if (options.allowed && options.allowed.length) {
+      /**
+       * @type {string[]}
+       */
+      this.allowedStrings = [];
+
+      /**
+       * @type {RegExp[]}
+       */
+      this.allowedRegExp = [];
+
+// eslint-disable-next-line no-restricted-syntax
+      for (const allowed of options.allowed) {
+        if (allowed instanceof RegExp) {
+          this.allowedRegExp.push(allowed);
+        } else if (typeof allowed === 'string') {
+          this.allowedStrings.push(allowed);
+        }
+      }
+
+      this.validators.push(val => this.allowedStrings.includes(val));
+      this.validators.push(val => this.allowedRegExp.some(regexp => !!val.match(regexp)));
     }
   }
 }
