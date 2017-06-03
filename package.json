@@ -17,6 +17,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
+    "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -66,9 +67,24 @@
       "stage-0"
     ]
   },
+  "release": {
+    "analyzeCommits": "@bubltechnology/customizable-commit-analyzer"
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
+    },
+    "commitTypeMap": {
+      "feat": "minor",
+      "fix": "patch",
+      "docs": "patch",
+      "style": "null",
+      "refactor": "patch",
+      "perf": "patch",
+      "test": "null",
+      "build": "patch",
+      "ci": "patch",
+      "chore": "patch"
     }
   },
   "pre-commit": "lint-staged",
