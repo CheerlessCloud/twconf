@@ -22,5 +22,5 @@ scripts:
   - npm run cover
   - npm run build
 after_success:
-  - 'npm run report | ./node_modules/.bin/coveralls'
+  - npm run report-coverage
   - npm run semantic-release
