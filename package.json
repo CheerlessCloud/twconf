@@ -62,7 +62,8 @@
       "node": true
     },
     "rules": {
-      "strict": 0
+      "strict": 0,
+      "no-restricted-syntax": "off"
     }
   },
   "babel": {
