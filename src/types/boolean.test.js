@@ -14,6 +14,8 @@ describe('boolean type', () => {
   it('check validators', () => {
     const booleanType = new BooleanType();
 
+    booleanType.validators.map(fn => expect(fn(true)).to.be.true);
+    booleanType.validators.map(fn => expect(fn(false)).to.be.true);
     booleanType.validators.map(fn => expect(fn('true')).to.be.true);
     booleanType.validators.map(fn => expect(fn('TRUE')).to.be.true);
     booleanType.validators.map(fn => expect(fn('1')).to.be.true);
