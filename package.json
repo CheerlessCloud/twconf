@@ -6,6 +6,16 @@
   "repository": "git@github.com:TeslaCtroitel/twconf.git",
   "author": "EnRoute <nnsceg@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "lint-staged": "lint-staged",
+    "prebuild": "rimraf ./dist",
+    "build": "babel src -d ./dist -s --ignore test.js",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -24,23 +34,8 @@
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6"
   },
-  "scripts": {
-    "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
-    "lint-staged": "lint-staged",
-    "prebuild": "rimraf ./dist",
-    "build": "babel -d ./dist -s --ingore *.test.js ./src",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
-  },
   "engines": {
     "node": ">=6.0.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   },
   "eslintConfig": {
     "root": true,
@@ -58,17 +53,6 @@
       "strict": 0
     }
   },
-  "pre-commit": "lint-staged",
-  "lint-staged": {
-    "*.js": "lint"
-  },
-  "publishConfig": {
-    "tag": "canary"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
   "babel": {
     "presets": [
       [
@@ -81,5 +65,18 @@
       ],
       "stage-0"
     ]
-  }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "lint"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }
