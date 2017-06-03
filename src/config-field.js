@@ -1,3 +1,4 @@
+/* eslint max-len: ["error", { "code": 100, "ignoreComments": true }] */
 import { ConfigFieldBaseType as BaseType } from './types';
 
 /**
@@ -19,6 +20,7 @@ class ConfigField {
    * @param {functions[]} config.postTransforms
    * [array of transformation for value, apply after validation]
    * @param {functions.<boolean>[]} config.validators [array of validators for value]
+   * @param {function(value:*, key:string, env:Map.<string, string>).<(Map.<string, *>|{})>} config.splitter
    * @param {*} config.default [default value for this field]
    */
   constructor(config) {
@@ -80,6 +82,11 @@ class ConfigField {
      * @type {function.<boolean>[]}
      */
     this.validators = [...this.type.validators, ...(config.validators || [])];
+
+    /**
+     * @type {function(value:*, key:string, env:Map.<string, string>).<(Map.<string, *>|{})>}
+     */
+    this.splitterFunction = config.splitter;
   }
 
   /**
@@ -108,15 +115,7 @@ class ConfigField {
       }
     }
 
-    try {
-      if (!this.applyValidators(newValue)) {
-        throw new Error();
-      }
-    } catch (err) {
-      const newError = new Error('Validation error');
-      newError.error = err;
-      throw newError;
-    }
+    this.applyValidators(newValue);
 
     try {
       newValue = this.applyPostTransforms(newValue);
@@ -127,6 +126,32 @@ class ConfigField {
     }
 
     return newValue;
+  }
+
+  /**
+   * @method splitter
+   * @param {*} value
+   * @param {string} key
+   * @param {Map.<string, string>} env
+   * @return {Map.<string, *>}
+   */
+  splitter(value, key, env) {
+    if (!this.splitterFunction) {
+      return new Map([[key, value]]);
+    }
+
+    const result = this.splitterFunction(value, key, env);
+
+    if (result instanceof Map) {
+      return result;
+    }
+
+    const validResult = (result instanceof Map || typeof result === 'object');
+    if (!result || !validResult) {
+      return new Map([[key, value]]);
+    }
+
+    return new Map(Object.entries(result));
   }
 
   /**

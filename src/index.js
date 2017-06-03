@@ -99,7 +99,9 @@ class TwConf {
 
     this.skeleton.forEach((configField, key) => {
       try {
-        this.config.set(key, configField.validate(this.env.get(key)));
+        const validatedValue = configField.validate(this.env.get(key));
+        configField.splitter(validatedValue, key, this.env)
+                   .forEach((newValue, newKey) => this.config.set(newKey, newValue));
       } catch (err) {
         err.field = key;
         errors.push(err);
@@ -107,7 +109,7 @@ class TwConf {
     });
 
     if (errors.length) {
-      const newError = new Error('Validation error');
+      const newError = new Error('Validation errors');
       newError.errors = errors;
       throw newError;
     }
