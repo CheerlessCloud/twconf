@@ -41,8 +41,13 @@ class StringType extends ConfigFieldBaseType {
         }
       }
 
-      this.validators.push(val => this.allowedStrings.includes(val));
-      this.validators.push(val => this.allowedRegExp.some(regexp => !!val.match(regexp)));
+      if (this.allowedStrings.length > 0) {
+        this.validators.push(val => this.allowedStrings.includes(val));
+      }
+
+      if (this.allowedRegExp.length > 0) {
+        this.validators.push(val => this.allowedRegExp.some(regexp => !!val.match(regexp)));
+      }
     }
   }
 }

@@ -39,7 +39,7 @@ describe('string type', () => {
   it('check allowed string list validator', () => {
     const stringType = new StringType({ allowed: ['allow1', 'allow2'] });
 
-    expect(stringType.validators).to.be.have.length(3);
+    expect(stringType.validators).to.be.have.length(2);
     expect(stringType.validators[1]('allow1')).to.be.equal(true);
     expect(stringType.validators[1]('allow2')).to.be.equal(true);
     expect(stringType.validators[1]('disallow string')).to.be.equal(false);
@@ -48,10 +48,21 @@ describe('string type', () => {
   it('check allowed regexp list validator', () => {
     const stringType = new StringType({ allowed: [/^[A-Z]+$/, /^\d+$/] });
 
+    expect(stringType.validators).to.be.have.length(2);
+    expect(stringType.validators[1]('deny value')).to.be.equal(false);
+    expect(stringType.validators[1]('AZA')).to.be.equal(true);
+    expect(stringType.validators[1]('125')).to.be.equal(true);
+    expect(stringType.validators[1]('125abc')).to.be.equal(false);
+  });
+
+  it('check allowed regexp and string list validator', () => {
+    const stringType = new StringType({ allowed: ['abc', /^[A-Z]+$/, /^\d+$/] });
+
     expect(stringType.validators).to.be.have.length(3);
     expect(stringType.validators[2]('deny value')).to.be.equal(false);
     expect(stringType.validators[2]('AZA')).to.be.equal(true);
     expect(stringType.validators[2]('125')).to.be.equal(true);
     expect(stringType.validators[2]('125abc')).to.be.equal(false);
+    expect(stringType.validators[1]('abc')).to.be.equal(true);
   });
 });
