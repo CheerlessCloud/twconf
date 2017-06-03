@@ -19,7 +19,8 @@ branches:
 before_script:
   - npm prune
 scripts:
-  - npm run test
+  - npm run cover
   - npm run build
 after_success:
+  - 'npm run report | | ./node_modules/.bin/coveralls'
   - npm run semantic-release
