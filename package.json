@@ -16,6 +16,8 @@
   ],
   "scripts": {
     "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
+    "test:dev": "npm t -- -w",
+    "cover": "nyc npm t",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "lint-staged": "lint-staged",
@@ -39,6 +41,7 @@
     "eslint-plugin-import": "^2.3.0",
     "lint-staged": "^3.5.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.2",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6"
