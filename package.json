@@ -73,7 +73,12 @@
         {
           "targets": {
             "node": "6.9"
-          }
+          },
+          "useBuiltIns": true,
+          "exclude": [
+            "transform-regenerator",
+            "transform-async-to-generator"
+          ]
         }
       ],
       "stage-0"
@@ -106,5 +111,8 @@
   "files": [
     "dist/*.*",
     "dist/**/*.*"
-  ]
+  ],
+  "dependencies": {
+    "core-js": "^2.4.1"
+  }
 }
