@@ -15,10 +15,9 @@
     "plugabble"
   ],
   "scripts": {
-    "test": "npm run cover",
-    "mocha": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
-    "test:dev": "npm run mocha -- -w",
-    "cover": "nyc npm run mocha",
+    "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
+    "test:dev": "npm t -- -w",
+    "cover": "nyc npm t",
     "report-coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
