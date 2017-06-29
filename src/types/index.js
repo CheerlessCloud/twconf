@@ -5,6 +5,7 @@ import NumberType from './number';
 import IntType from './int';
 import FloatType from './float';
 import IPAddressType from './ip-address';
+import BooleanType from './boolean';
 
 export {
   ConfigFieldBaseType,
@@ -13,6 +14,7 @@ export {
   IntType,
   FloatType,
   IPAddressType,
+  BooleanType,
 };
 
 export default {
@@ -22,4 +24,5 @@ export default {
   IntType,
   FloatType,
   IPAddressType,
+  BooleanType,
 };
