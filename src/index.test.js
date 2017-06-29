@@ -20,7 +20,7 @@ describe('twconfig main tests', () => {
       const conf = new TwConf({
         'database.mongodb.hostname': {
           comment: 'hostname of mongodb',
-          simple: 'ams3.digitalocean.com',
+          sample: 'ams3.digitalocean.com',
           type: new StringType(),
           // required: true,
           preTransforms: [
