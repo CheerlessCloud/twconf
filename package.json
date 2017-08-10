@@ -21,6 +21,7 @@
     "report-coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
+    "eslint": "eslint",
     "lint-staged": "lint-staged",
     "prebuild": "rimraf ./dist",
     "build": "babel src -d ./dist -s --ignore test.js",
@@ -103,12 +104,12 @@
       "test": "null",
       "build": "patch",
       "ci": "null",
-      "chore": "patch"
+      "chore": "null"
     }
   },
   "pre-commit": "lint-staged",
   "lint-staged": {
-    "*.js": "lint"
+    "*.js": "eslint"
   },
   "files": [
     "dist/*.*",
