@@ -46,7 +46,7 @@ class ConfigField {
     this.required = ((this.default === null || this.default === undefined) &&
     (config.required === null || config.required === undefined || config.required === true));
 
-// eslint-disable-next-line import/no-named-as-default-member
+    // eslint-disable-next-line import/no-named-as-default-member
     if (config.type instanceof Types.ConfigFieldBaseType) {
       /**
        * @type {ConfigFieldBaseType}

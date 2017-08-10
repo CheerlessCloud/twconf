@@ -18,8 +18,8 @@ function envParse(options = {}) {
       }
 
       const newKey = key.toLowerCase()
-                          .replace(/:/g, '.')
-                          .replace(/([_-])([a-z\d])/g, str => str[1].toUpperCase());
+        .replace(/:/g, '.')
+        .replace(/([_-])([a-z\d])/g, str => str[1].toUpperCase());
 
       return [newKey, env[key]];
     }));

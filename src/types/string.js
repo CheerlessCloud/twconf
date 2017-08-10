@@ -32,7 +32,7 @@ class StringType extends ConfigFieldBaseType {
        */
       this.allowedRegExp = [];
 
-// eslint-disable-next-line no-restricted-syntax
+      // eslint-disable-next-line no-restricted-syntax
       for (const allowed of options.allowed) {
         if (allowed instanceof RegExp) {
           this.allowedRegExp.push(allowed);

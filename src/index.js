@@ -101,7 +101,7 @@ class TwConf {
       try {
         const validatedValue = configField.validate(this.env.get(key));
         configField.splitter(validatedValue, key, this.env)
-                   .forEach((newValue, newKey) => this.config.set(newKey, newValue));
+          .forEach((newValue, newKey) => this.config.set(newKey, newValue));
       } catch (err) {
         err.field = key;
         errors.push(err);

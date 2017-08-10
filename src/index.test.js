@@ -16,7 +16,7 @@ describe('twconfig main tests', () => {
 
   it('simple smoke test', () => {
     expect(() => {
-// eslint-disable-next-line no-new
+      // eslint-disable-next-line no-new
       const conf = new TwConf({
         'database.mongodb.hostname': {
           comment: 'hostname of mongodb',
@@ -43,7 +43,7 @@ describe('twconfig main tests', () => {
     };
 
     expect(() => {
-// eslint-disable-next-line no-new
+      // eslint-disable-next-line no-new
       const conf = new TwConf({
         nodeEnv: {
           comment: 'env mode',
@@ -71,7 +71,7 @@ describe('twconfig main tests', () => {
     };
 
     expect(() => {
-// eslint-disable-next-line no-new
+      // eslint-disable-next-line no-new
       const conf = new TwConf({
         nodeEnv: {
           comment: 'env mode',
