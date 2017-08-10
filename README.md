@@ -31,3 +31,28 @@ const conf = new TwConf({
 
 conf.get('database.mongodb.hostname');
 ```
+#### String-defined type
+``` javascript
+new TwConf({
+  nodeEnv: {
+    comment: 'env mode',
+    type: 'string',
+    allowed: ['development', 'test', 'production'],
+    default: 'development',
+    splitter: val => ({
+      envType: val,
+      isDevelopment: val === 'development',
+      isTesting: val === 'test',
+      isProduction: val === 'production',
+    }),
+  },
+});
+```
+
+Available types:
+- boolean
+- float
+- int
+- ipaddress
+- number
+- string
