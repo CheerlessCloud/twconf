@@ -20,5 +20,4 @@ class BooleanType extends ConfigFieldBaseType {
   }
 }
 
-export default BooleanType;
 module.exports = BooleanType;

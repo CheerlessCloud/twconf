@@ -196,4 +196,3 @@ class ConfigField {
 }
 
 export default ConfigField;
-module.exports = ConfigField;

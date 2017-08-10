@@ -7,17 +7,7 @@ import FloatType from './float';
 import IPAddressType from './ip-address';
 import BooleanType from './boolean';
 
-export {
-  ConfigFieldBaseType,
-  StringType,
-  NumberType,
-  IntType,
-  FloatType,
-  IPAddressType,
-  BooleanType,
-};
-
-export default {
+module.exports = {
   ConfigFieldBaseType,
   StringType,
   NumberType,

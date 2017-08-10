@@ -10,5 +10,4 @@ class IntType extends NumberType {
   }
 }
 
-export default IntType;
 module.exports = IntType;

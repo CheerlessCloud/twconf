@@ -21,5 +21,4 @@ class FloatType extends NumberType {
   }
 }
 
-export default FloatType;
 module.exports = FloatType;

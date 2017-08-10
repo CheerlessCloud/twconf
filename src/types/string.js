@@ -52,5 +52,4 @@ class StringType extends ConfigFieldBaseType {
   }
 }
 
-export default StringType;
 module.exports = StringType;

@@ -16,5 +16,4 @@ class NumberType extends ConfigFieldBaseType {
   }
 }
 
-export default NumberType;
 module.exports = NumberType;

@@ -20,5 +20,4 @@ class IPAddressType extends ConfigFieldBaseType {
   }
 }
 
-export default IPAddressType;
 module.exports = IPAddressType;

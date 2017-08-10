@@ -17,5 +17,4 @@ class ConfigFieldBaseType {
   };
 }
 
-export default ConfigFieldBaseType;
 module.exports = ConfigFieldBaseType;

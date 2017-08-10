@@ -26,4 +26,3 @@ function envParse(options = {}) {
 }
 
 export default envParse;
-module.exports = envParse;
