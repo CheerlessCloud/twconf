@@ -39,10 +39,10 @@
     "commitizen": "^2.9.6",
     "coveralls": "^2.13.1",
     "eslint": "^4.1.0",
-    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.6.1",
     "lint-staged": "^4.0.0",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.0",
     "nyc": "^11.0.3",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
@@ -115,6 +115,6 @@
     "dist/**/*.*"
   ],
   "dependencies": {
-    "core-js": "^2.4.1"
+    "core-js": "^2.5.0"
   }
 }
