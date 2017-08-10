@@ -96,13 +96,13 @@
     "commitTypeMap": {
       "feat": "minor",
       "fix": "patch",
-      "docs": "patch",
+      "docs": "null",
       "style": "null",
       "refactor": "patch",
       "perf": "patch",
       "test": "null",
       "build": "patch",
-      "ci": "patch",
+      "ci": "null",
       "chore": "patch"
     }
   },
