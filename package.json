@@ -21,12 +21,12 @@
     "report-coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "eslint": "eslint",
     "lint-staged": "lint-staged",
     "prebuild": "rimraf ./dist",
     "build": "babel src -d ./dist -s --ignore test.js",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "make-commit": "git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "precommit": "npm t"
   },
   "devDependencies": {
     "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
@@ -39,9 +39,10 @@
     "chai": "^4.0.2",
     "commitizen": "^2.9.6",
     "coveralls": "^2.13.1",
-    "eslint": "^4.1.0",
+    "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.6.1",
+    "husky": "^0.14.3",
     "lint-staged": "^4.0.0",
     "mocha": "^3.5.0",
     "nyc": "^11.0.3",
@@ -109,7 +110,7 @@
   },
   "pre-commit": "lint-staged",
   "lint-staged": {
-    "*.js": "eslint"
+    "*.js": ["eslint --fix", "git add"]
   },
   "files": [
     "dist/*.*",
