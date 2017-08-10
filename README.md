@@ -7,6 +7,7 @@ NodeJS module for validation config from environment variables
 [![dependencies Status](https://david-dm.org/TeslaCtroitel/twconf/status.svg)](https://david-dm.org/TeslaCtroitel/twconf)
 [![devDependencies Status](https://david-dm.org/TeslaCtroitel/twconf/dev-status.svg)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/TeslaCtroitel/twconf/badge.svg?branch=master)](https://coveralls.io/github/TeslaCtroitel/twconf?branch=master)
+[![BCH compliance](https://bettercodehub.com/edge/badge/TeslaCtroitel/twconf?branch=master)](https://bettercodehub.com/)
 
 **Attention: this is very early version. Don't use it in production.**
 
