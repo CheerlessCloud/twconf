@@ -1,18 +1,18 @@
-import ConfigFieldBaseType from './base';
+import BaseType from './base';
 
-class NumberType extends ConfigFieldBaseType {
-  constructor(min, max) {
+class NumberType extends BaseType {
+  constructor({ min, max } = {}) {
     super();
 
-    this.validators.push(val => typeof val === 'number');
+    this.transformators.pre.push(val => Number(val));
 
-    if (min !== null && min !== undefined) {
-      this.validators.push(val => val > min);
-    }
+    this.validators.push(val => !isNaN(val));
 
-    if (max !== null && max !== undefined) {
-      this.validators.push(val => val < max);
-    }
+    this.validators.push(val =>
+      ((typeof min === 'number') ? val >= min : true));
+
+    this.validators.push(val =>
+      ((typeof max === 'number') ? val <= max : true));
   }
 }
 
