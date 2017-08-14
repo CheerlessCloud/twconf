@@ -18,6 +18,7 @@
     "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
     "test:dev": "npm t -- -w",
     "cover": "nyc npm t",
+    "postcover": "nyc report --reporter=html --reporter=lcov",
     "report-coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
