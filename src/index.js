@@ -18,10 +18,10 @@ class TwConf {
   env = new Map();
 
   /**
-   * @method get
+   * @function get
    * @public
-   * @param {string} key
-   * @return {*}
+   * @param {string} key - Key in config.
+   * @returns {*} - Value of key.
    */
   get(key) {
     return this.config.get(key);
@@ -42,20 +42,16 @@ class TwConf {
   }
 
   /**
-   * Create TwConf object
-   * @param {(Map.<string, ConfigField>|Array.<string, ConfigField>[]|object)} skeleton
-   * @param {object=} options
-   * @param {boolean} [options.allowUnspecified=true]
-   * @param {boolean} [options.flatOnly=false]
-   * @param {boolean} [options.validationOnDemand=false]
+   * @param {(Map.<string, ConfigField>|Array.<string, ConfigField>[]|object)} skeleton - Map of rules for validation config.
+   * @param {object=} options - Options for twconf object.
+   * @param {boolean} [options.flatOnly=false] - Allow only flat keys (this throw error on "foo.bar" key).
+   * @param {boolean} [options.validationOnDemand=false] - Validate on demand (it's use for testing).
    */
   constructor(skeleton, {
-    allowUnspecified = true,
     flatOnly = false,
     validationOnDemand = false,
   } = {}) {
     this.options = {};
-    this.options.allowUnspecified = allowUnspecified;
     this.options.flatOnly = flatOnly;
     this.options.validationOnDemand = validationOnDemand;
 
@@ -82,7 +78,7 @@ class TwConf {
   }
 
   /**
-   * @method validate
+   * @function validate
    * @public
    */
   validate() {
