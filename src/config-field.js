@@ -92,7 +92,9 @@ class ConfigField {
       }
     }
 
-    this.applyValidators(newValue);
+    if (!this.applyValidators(newValue)) {
+      throw new EError('Invalid value', this);
+    }
 
     try {
       newValue = this.applyPostTransforms(newValue);
