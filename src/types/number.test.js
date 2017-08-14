@@ -15,24 +15,33 @@ describe('number type', () => {
   it('base validators', () => {
     const type = new NumberType();
 
-    expect(type.validators).to.be.have.length(3);
-    expect(type.validators[0](NaN)).to.be.false;
-    expect(type.validators[0](282)).to.be.true;
+    expect(type.applyValidators(NaN)).to.be.false;
+    expect(type.applyValidators(282)).to.be.true;
   });
 
   it('min validator', () => {
     const type = new NumberType({ min: 5 });
 
-    expect(type.validators[1](10)).to.be.true;
-    expect(type.validators[1](5)).to.be.true;
-    expect(type.validators[1](4)).to.be.false;
+    expect(type.applyValidators(10)).to.be.true;
+    expect(type.applyValidators(5)).to.be.true;
+    expect(type.applyValidators(4)).to.be.false;
   });
 
   it('max validator', () => {
     const type = new NumberType({ max: 5 });
 
-    expect(type.validators[2](4)).to.be.true;
-    expect(type.validators[2](5)).to.be.true;
-    expect(type.validators[2](6)).to.be.false;
+    expect(type.applyValidators(4)).to.be.true;
+    expect(type.applyValidators(5)).to.be.true;
+    expect(type.applyValidators(6)).to.be.false;
+  });
+
+  it('min and max validator', () => {
+    const type = new NumberType({ min: 2, max: 5 });
+
+    expect(type.applyValidators(2)).to.be.true;
+    expect(type.applyValidators(5)).to.be.true;
+    expect(type.applyValidators(4)).to.be.true;
+    expect(type.applyValidators(1)).to.be.false;
+    expect(type.applyValidators(6)).to.be.false;
   });
 });
