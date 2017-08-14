@@ -37,8 +37,17 @@ class TwConf {
     return Object.freeze(result);
   }
 
-  toString() {
-    return JSON.stringify(this.config);
+  /**
+   * @readonly
+   * @type {Object}
+   */
+  get asObject() {
+    const obj = { };
+
+    this.config.forEach((value, key) => { obj[key] = value; });
+
+    return obj;
+  }
   }
 
   /**
