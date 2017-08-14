@@ -1,5 +1,4 @@
 /* eslint max-len: ["error", { "code": 100, "ignoreComments": true }] */
-import 'core-js';
 import Types from './types';
 
 /**
