@@ -1,59 +1,80 @@
 # twconf
-NodeJS module for validation config from environment variables
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
+[![codestyle](https://img.shields.io/badge/codestyle-airbnb-brightgreen.svg?style=flat-square)](https://github.com/airbnb/javascript)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/TeslaCtroitel/twconf.svg)](https://greenkeeper.io/)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Build Status](https://travis-ci.org/TeslaCtroitel/twconf.svg?branch=master)](https://travis-ci.org/TeslaCtroitel/twconf)
-[![dependencies Status](https://david-dm.org/TeslaCtroitel/twconf/status.svg)](https://david-dm.org/TeslaCtroitel/twconf)
-[![devDependencies Status](https://david-dm.org/TeslaCtroitel/twconf/dev-status.svg)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
-[![Coverage Status](https://coveralls.io/repos/github/TeslaCtroitel/twconf/badge.svg?branch=master)](https://coveralls.io/github/TeslaCtroitel/twconf?branch=master)
-[![BCH compliance](https://bettercodehub.com/edge/badge/TeslaCtroitel/twconf?branch=master)](https://bettercodehub.com/)
+[![Travis](https://img.shields.io/travis/TeslaCtroitel/twconf.svg?style=flat-square)](https://travis-ci.org/TeslaCtroitel/twconf)
+[![dependencies Status](https://david-dm.org/TeslaCtroitel/twconf/status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf)
+[![devDependencies Status](https://david-dm.org/TeslaCtroitel/twconf/dev-status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
+[![Coverage Status](https://img.shields.io/coveralls/TeslaCtroitel/twconf.svg?style=flat-square)](https://coveralls.io/github/TeslaCtroitel/twconf)
 
-**Attention: this is very early version. Don't use it in production.**
+[![Sponsor](https://app.codesponsor.io/embed/jkPpzosXxwDBBaBNpoqWKCXd/TeslaCtroitel/twconf.svg)](https://app.codesponsor.io/link/jkPpzosXxwDBBaBNpoqWKCXd/TeslaCtroitel/twconf)
+
+**Attention: this is beta version. Use it in production with caution.**
+
+NodeJS module for strictly configuration from environment variables.
 
 ```javascript
 import TwConf from 'twconf';
 
 const conf = new TwConf({
-  'database.mongodb.hostname': {
-    comment: 'hostname of mongodb',
-    simple: 'mongodb://localhost/test',
-    type: new StringType({ allowed: [ /mongodb\:/ ] }),
+  'database.mongodb.uri': {
+    comment: 'MongoDB connection URI',
+    simple: 'mongodb://localhost/test1',
+    type: new TwConf.Types.StringType({ allowed: [ /mongodb\:/ ] }),
     required: true,
-    preTransforms: [
-      // Yes, it's a pointless example.
-      value => String(value),
-    ],
+    preTransforms: [ /* function(value: string).<any> */ ],
+    postTransforms: [ /* function(value: any).<any> */ ],
     validators: [
-      value => value !== 'localhost',
+      value => value !== 'mongodb://localhost/test',
     ],
   },
 });
 
-conf.get('database.mongodb.hostname');
+conf.get('database.mongodb.hostname'); // get config value
+conf.toString(); // get JSON version of config
 ```
 #### String-defined type
 ``` javascript
 new TwConf({
   nodeEnv: {
-    comment: 'env mode',
     type: 'string',
     allowed: ['development', 'test', 'production'],
     default: 'development',
-    splitter: val => ({
-      envType: val,
-      isDevelopment: val === 'development',
-      isTesting: val === 'test',
-      isProduction: val === 'production',
-    }),
+  },
+});
+```
+
+#### Object-defined type
+``` javascript
+new TwConf({
+  nodeEnv: {
+    type: {
+      name: 'string',
+      allowed: ['development', 'test', 'production'],
+    },
+    default: 'development',
   },
 });
 ```
 
 Available types:
-- boolean
-- float
-- int
-- ipaddress
-- number
-- string
+- **Boolean**
+  - no options
+- **Float**
+  - *min*: *number* - minimal value for field
+  - *max*: *number* - maximum value for field
+  - *precision*: *number* - count of number after dot
+- **Int**
+  - *min*: *number* - minimal value for field
+  - *max*: *number* - maximum value for field
+- **IpAddress**
+  - *version*: *number (4|6)* - IP address standard version
+- **Number**
+  - *min*: *number* - minimal value for field
+  - *max*: *number* - maximum value for field
+- **String**
+  - *minLength*: *number* - mininal length of string
+  - *maxLength*: *number* - maximum length of string
+  - *allowed*: *Array.<(string|RegExp)>* - allowed values of this field
