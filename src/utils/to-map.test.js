@@ -25,4 +25,8 @@ describe('to map converter', () => {
     expect(res.get('key1')).to.be.equals('val1');
     expect(res.size).to.be.equals(1);
   });
+
+  it('throw exeption on empty argument', () => {
+    expect(() => toMap()).to.throw('No collection');
+  });
 });
