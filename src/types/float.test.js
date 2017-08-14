@@ -19,4 +19,12 @@ describe('float type', () => {
     expect(type.validators[3](282.333)).to.be.true;
     expect(type.validators[3](282.333333)).to.be.true;
   });
+
+  it('precision validator with negative precision', () => {
+    const type = new FloatType({ precision: -3 });
+
+    expect(type.validators[3](282)).to.be.true;
+    expect(type.validators[3](282.33)).to.be.true;
+    expect(type.validators[3](282.333)).to.be.true;
+  });
 });
