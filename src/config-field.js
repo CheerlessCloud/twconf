@@ -6,21 +6,18 @@ import Types from './types';
  */
 class ConfigField {
   /**
-   * @param {object} config
-   * @param {string} config.name - name of this field
-   * @param {string} config.comment - comment for this field
-   * @param {string} config.sample - sample of value
-   * @param {ConfigFieldBaseType} config.type - type of value
-   * @param {(boolean|function.<boolean>)=} config.required
-   * [if default is undefined, by default this field set to 'true']
-   * @param {functions[]} config.preTransforms
-   * [array of transformation for value, apply before validation]
-   * @param {{ pre: function[], post: function[] }} config.transforms [transforms for value]
-   * @param {functions[]} config.postTransforms
-   * [array of transformation for value, apply after validation]
-   * @param {functions.<boolean>[]} config.validators [array of validators for value]
-   * @param {function(value:*, key:string, env:Map.<string, string>).<(Map.<string, *>|{})>} config.splitter
-   * @param {*} config.default [default value for this field]
+   * @param {Object} config - ConfigField attributes.
+   * @param {string} config.name - Name of this field.
+   * @param {string} config.comment - Comment for this field.
+   * @param {string} config.sample - Sample of value.
+   * @param {ConfigFieldBaseType} config.type - Type of field.
+   * @param {any} config.default - Default value for this field.
+   * @param {boolean=} config.required - Is this field required. If "default" field is undefined, default value of "required" field will be 'true'.
+   * @param {function(value:string).<any>[]} config.preTransforms - Array of transformation for value, apply before validation.
+   * @param {{ pre: function(value:string).<any>[], post: function(value:string).<any>[] }} config.transforms - Transforms for value.
+   * @param {function(value:string).<any>[]} config.postTransforms - Array of transformation for value, apply after validation.
+   * @param {function(value: any).<boolean>[]} config.validators - Array of validators for value.
+   * @param {function(value: any, key: string, env: Map.<string, string>).<(Map.<string, *>|{})>} config.splitter - Array of splitters functions.
    */
   constructor(config) {
     /**
@@ -41,7 +38,7 @@ class ConfigField {
      */
     this.default = config.default;
 
-    // if 'default' value is undefined, by default this rule required flag set to true
+    // if 'default' value is undefined, by default required flag set to true
     /**
      * @type {boolean}
      */
@@ -105,9 +102,9 @@ class ConfigField {
   }
 
   /**
-   * @method validate
-   * @param {*=} value
-   * @return {*}
+   * @function validate
+   * @param {any=} value - Value to validation and transformations.
+   * @returns {any} - Value after transformations.
    */
   validate(value) {
     let newValue;
@@ -144,11 +141,11 @@ class ConfigField {
   }
 
   /**
-   * @method splitter
-   * @param {*} value
-   * @param {string} key
-   * @param {Map.<string, string>} env
-   * @return {Map.<string, *>}
+   * @function splitter
+   * @param {*} value - Value of field.
+   * @param {string} key - Name of field.
+   * @param {Map.<string, string>} env - Map with environment variables.
+   * @returns {Map.<string, *>} - Map of new values.
    */
   splitter(value, key, env) {
     if (!this.splitterFunction) {
@@ -170,27 +167,27 @@ class ConfigField {
   }
 
   /**
-   * @method applyPreTransforms
-   * @param {*} value
-   * @return {*}
+   * @function applyPreTransforms
+   * @param {any} value - Value for transformation.
+   * @returns {any} - Value after transformation.
    */
   applyPreTransforms(value) {
     return this.transformators.pre.reduce((val, fn) => fn(val), value);
   }
 
   /**
-   * @method applyValidators
-   * @param {*} value
-   * @return {boolean}
+   * @function applyValidators
+   * @param {any} value - Value for validation.
+   * @returns {boolean} - Value after validation.
    */
   applyValidators(value) {
     return this.validators.every(fn => fn(value));
   }
 
   /**
-   * @method applyPostTransforms
-   * @param {*} value
-   * @return {*}
+   * @function applyPostTransforms
+   * @param {any} value - Value for transformation.
+   * @returns {any} - Value after transformation.
    */
   applyPostTransforms(value) {
     return this.transformators.post.reduce((val, fn) => fn(val), value);
