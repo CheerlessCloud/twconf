@@ -1,4 +1,4 @@
-import Types from './types';
+import getType from './utils/get-type';
 
 /**
  * @public
@@ -45,25 +45,10 @@ class ConfigField {
     this.required = ((this.default === null || this.default === undefined) &&
     (config.required === null || config.required === undefined || config.required === true));
 
-    // eslint-disable-next-line import/no-named-as-default-member
-    if (config.type instanceof Types.ConfigFieldBaseType) {
-      /**
-       * @type {ConfigFieldBaseType}
-       */
-      this.type = config.type;
-    } else if (typeof config.type === 'string') {
-      const typeName = `${config.type[0].toUpperCase()}${config.type.toLowerCase().slice(1)}Type`;
-      const CurrentType = Types[typeName];
-
-      if (!CurrentType) {
-        throw new TypeError(`Can't find type ${config.type} (as ${typeName})`);
-      }
-
-      this.type = new CurrentType(config);
-    } else {
-      throw new Error('Type of field must be string or object extend from base ConfigFieldType');
-    }
-
+    /**
+     * @type {ConfigFieldBaseType}
+     */
+    this.type = getType(config);
 
     /**
      * @type {{ pre: function[], post: function[] }}
