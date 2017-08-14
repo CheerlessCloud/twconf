@@ -1,21 +1,20 @@
 import { isIP } from 'net';
-import ConfigFieldBaseType from './base';
+import BaseType from './base';
 
-class IPAddressType extends ConfigFieldBaseType {
-  constructor(version) {
+/**
+ * @class IPAddressType
+ * @extends {BaseType}
+ */
+class IPAddressType extends BaseType {
+  constructor({ version } = {}) {
     super();
 
     this.validators.push((val) => {
-      if (typeof val !== 'string') {
-        return false;
+      if (version) {
+        return isIP(String(val)) === version;
       }
 
-      if (version === 4) {
-        return isIP(val) === 4;
-      } else if (version === 6) {
-        return isIP(val) === 6;
-      }
-      return !!isIP(val);
+      return !!isIP(String(val));
     });
   }
 }
