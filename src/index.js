@@ -48,6 +48,15 @@ class TwConf {
 
     return obj;
   }
+
+  /**
+   * @param {boolean} [beautify=true] - Sould beautify string.
+   * @returns {string} - JSON version of config.
+   */
+  toString(beautify = true) {
+    return beautify
+      ? JSON.stringify(this.asObject, null, 2)
+      : JSON.stringify(this.asObject);
   }
 
   /**

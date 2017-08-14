@@ -138,4 +138,23 @@ describe('twconfig main tests', () => {
     expect(config.env.size).to.be.equal(0);
     expect(config.config.size).to.be.equal(0);
   });
+
+  it('toString method', () => {
+    const config = new TwConf({
+      nodeEnv: {
+        type: 'string',
+        allowed: ['development', 'test', 'production'],
+        default: 'development',
+      },
+    }, {
+      env: {
+        NODE_ENV: 'test',
+      },
+    });
+
+    expect(typeof config.toString).to.be.equal('function');
+    expect(() => config.toString()).to.not.throw();
+    expect(config.toString(false)).to.be.equal('{"nodeEnv":"test"}');
+    expect(config.toString()).to.be.equal('{\n  "nodeEnv": "test"\n}');
+  });
 });
