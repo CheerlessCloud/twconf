@@ -1,3 +1,11 @@
+/**
+ * @typedef {(Map.<any, any>|Array.<any, any>[]|object)} toMapArg
+ */
+
+/**
+ * @param {toMapArg} collection
+ * @returns {Map.<any, any>}
+ */
 // eslint-disable-next-line consistent-return
 function toMap(collection) {
   if (collection instanceof Map) {
