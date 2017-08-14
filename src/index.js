@@ -47,11 +47,15 @@ class TwConf {
    * @param {boolean} [options.flatOnly=false]
    * @param {boolean} [options.validationOnDemand=false]
    */
-  constructor(confSkeleton, options) {
+  constructor(confSkeleton, {
+    allowUnspecified = true,
+    flatOnly = false,
+    validationOnDemand = false,
+  } = {}) {
     this.options = {};
-    this.options.allowUnspecified = options?.allowUnspecified || true;
-    this.options.flatOnly = options?.flatOnly || false;
-    this.options.validationOnDemand = options?.validationOnDemand || false;
+    this.options.allowUnspecified = allowUnspecified;
+    this.options.flatOnly = flatOnly;
+    this.options.validationOnDemand = validationOnDemand;
 
     /**
      * @type {Map.<string, ConfigField>}
