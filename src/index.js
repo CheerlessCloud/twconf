@@ -68,7 +68,7 @@ class TwConf {
           });
         }
 
-        this.skeleton.set(key, new ConfigField(value));
+        this.skeleton.set(key, new ConfigField({ ...value, name: key }));
       }
     });
 

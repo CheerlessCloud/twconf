@@ -1,9 +1,8 @@
-/* eslint max-len: ["error", { "code": 100, "ignoreComments": true }] */
 import Types from './types';
 
 /**
  * @public
- * @class
+ * @class ConfigField
  */
 class ConfigField {
   /**
@@ -24,6 +23,10 @@ class ConfigField {
    * @param {*} config.default [default value for this field]
    */
   constructor(config) {
+    /**
+     * @type {string}
+     */
+    this.name = config.name;
     /**
      * @type {string}
      */
