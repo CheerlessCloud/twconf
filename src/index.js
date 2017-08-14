@@ -1,3 +1,4 @@
+import EError from 'eerror';
 import * as Types from './types';
 import ConfigField from './config-field';
 import envParser from './env-parser';
@@ -66,9 +67,9 @@ class TwConf {
     this.skeleton.forEach((value, key) => {
       if (!(value instanceof ConfigField)) {
         if (typeof value !== 'object') {
-          const err = new TypeError('Value of ConfigRule must be a object');
-          err.field = key;
-          throw err;
+          throw new EError('Config rule must be an object', {
+            field: key,
+          });
         }
 
         this.skeleton.set(key, new ConfigField(value));
@@ -101,9 +102,7 @@ class TwConf {
     });
 
     if (errors.length) {
-      const newError = new Error('Validation errors');
-      newError.errors = errors;
-      throw newError;
+      throw new EError('Validation errors', { errors });
     }
   }
 }
