@@ -45,17 +45,17 @@ class TwConf {
    * @param {(Map.<string, ConfigField>|Array.<string, ConfigField>[]|object)} skeleton - Map of rules for validation config.
    * @param {object=} options - Options for twconf object.
    * @param {boolean} [options.flatOnly=false] - Allow only flat keys (this throw error on "foo.bar" key).
-   * @param {boolean} [options.validationOnDemand=false] - Validate on demand (it's use for testing).
+   * @param {boolean} [options.validateOnDemand=false] - Validate on demand (it's use for testing).
    * @param {Object} [options.env=process.env] - Environment variables storage, by default is process.env (it's mostly use for testing).
    */
   constructor(skeleton, {
     flatOnly = false,
-    validationOnDemand = false,
+    validateOnDemand = false,
     env = process.env,
   } = {}) {
     this.options = {};
     this.options.flatOnly = flatOnly;
-    this.options.validationOnDemand = validationOnDemand;
+    this.options.validateOnDemand = validateOnDemand;
     this.options.env = env;
 
     /**
@@ -75,7 +75,7 @@ class TwConf {
       }
     });
 
-    if (!this.options.validationOnDemand) {
+    if (!this.options.validateOnDemand) {
       this.validate();
     }
   }

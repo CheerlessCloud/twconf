@@ -1,4 +1,4 @@
-/* eslint no-new: "off" */
+/* eslint no-new: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 /* globals describe, it, before, after, beforeEach, afterEach */
 
@@ -102,5 +102,40 @@ describe('twconfig main tests', () => {
         },
       }),
     ).to.throws(Error);
+  });
+
+  it('get flatObject', () => {
+    const config = new TwConf({
+      nodeEnv: {
+        type: 'string',
+        allowed: ['development', 'test', 'production'],
+        default: 'development',
+      },
+    }, {
+      env: {
+        NODE_ENV: 'test',
+      },
+    });
+
+    expect(config.flatObject).to.be.frozen;
+    expect(config.flatObject.nodeEnv).to.be.equal('test');
+  });
+
+  it('validate on demand option', () => {
+    const config = new TwConf({
+      nodeEnv: {
+        type: 'string',
+        allowed: ['development', 'test', 'production'],
+        default: 'development',
+      },
+    }, {
+      validateOnDemand: true,
+      env: {
+        NODE_ENV: 'test',
+      },
+    });
+
+    expect(config.env.size).to.be.equal(0);
+    expect(config.config.size).to.be.equal(0);
   });
 });
