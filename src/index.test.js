@@ -16,7 +16,6 @@ describe('twconfig main tests', () => {
 
   it('simple smoke test', () => {
     expect(() => {
-      // eslint-disable-next-line no-new
       const conf = new TwConf({
         'database.mongodb.hostname': {
           comment: 'hostname of mongodb',
@@ -37,13 +36,20 @@ describe('twconfig main tests', () => {
     }).not.to.throw();
   });
 
+  it('throw error on invalid config rule type', () => {
+    expect(() => {
+      // eslint-disable-next-line no-new
+      new TwConf({ 'database.mongodb.hostname': 'invalid value' });
+    }).to.be.throws('Config rule must be an object');
+  });
+
+
   it('splitter', () => {
     process.env = {
       NODE_ENV: 'production',
     };
 
     expect(() => {
-      // eslint-disable-next-line no-new
       const conf = new TwConf({
         nodeEnv: {
           comment: 'env mode',
