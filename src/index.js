@@ -1,6 +1,7 @@
 import * as Types from './types';
 import ConfigField from './config-field';
 import envParser from './env-parser';
+import toMap from './utils/to-map';
 
 class TwConf {
   static Types = Types;
@@ -41,13 +42,13 @@ class TwConf {
 
   /**
    * Create TwConf object
-   * @param {(Map.<string, ConfigField>|Array.<string, ConfigField>[]|object)} confSkeleton
+   * @param {(Map.<string, ConfigField>|Array.<string, ConfigField>[]|object)} skeleton
    * @param {object=} options
    * @param {boolean} [options.allowUnspecified=true]
    * @param {boolean} [options.flatOnly=false]
    * @param {boolean} [options.validationOnDemand=false]
    */
-  constructor(confSkeleton, {
+  constructor(skeleton, {
     allowUnspecified = true,
     flatOnly = false,
     validationOnDemand = false,
@@ -60,19 +61,7 @@ class TwConf {
     /**
      * @type {Map.<string, ConfigField>}
      */
-    this.skeleton = null;
-
-    if (confSkeleton instanceof Map) {
-      this.skeleton = confSkeleton;
-    }
-
-    if (confSkeleton instanceof Array) {
-      this.skeleton = new Map(confSkeleton);
-    }
-
-    if (typeof confSkeleton === 'object') {
-      this.skeleton = new Map(Object.keys(confSkeleton).map(key => [key, confSkeleton[key]]));
-    }
+    this.skeleton = toMap(skeleton);
 
     this.skeleton.forEach((value, key) => {
       if (!(value instanceof ConfigField)) {
