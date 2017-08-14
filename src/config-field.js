@@ -1,3 +1,4 @@
+import EError from 'eerror';
 import getType from './utils/get-type';
 import mergeTransforms from './utils//merge-transforms';
 
@@ -77,7 +78,7 @@ class ConfigField {
 
     if ((value === undefined || value === null)) {
       if (this.required) {
-        throw new Error('This field is required');
+        throw new EError('This field is required', this);
       }
 
       newValue = this.default;
@@ -87,9 +88,7 @@ class ConfigField {
       try {
         newValue = this.applyPreTransforms(value);
       } catch (err) {
-        const newError = new Error('Can\'t apply pre-transform to value');
-        newError.error = err;
-        throw newError;
+        throw new EError('Can\'t apply pre-transform to value', this, { error: err });
       }
     }
 
@@ -98,9 +97,7 @@ class ConfigField {
     try {
       newValue = this.applyPostTransforms(newValue);
     } catch (err) {
-      const newError = new Error('Can\'t apply post-transforms to value');
-      newError.error = err;
-      throw newError;
+      throw new EError('Can\'t apply post-transforms to value', this, { error: err });
     }
 
     return newValue;
