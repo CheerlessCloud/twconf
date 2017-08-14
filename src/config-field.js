@@ -1,4 +1,5 @@
 import getType from './utils/get-type';
+import mergeTransforms from './utils//merge-transforms';
 
 /**
  * @public
@@ -53,27 +54,7 @@ class ConfigField {
     /**
      * @type {{ pre: function[], post: function[] }}
      */
-    this.transformators = {
-      pre: [...this.type.transformators.pre],
-      post: [...this.type.transformators.post],
-    };
-
-    if (config.transforms) {
-      if (config.transforms.pre && config.transforms.pre instanceof Array) {
-        this.transformators.pre.push(...config.transforms.pre);
-      }
-      if (config.transforms.post && config.transforms.post instanceof Array) {
-        this.transformators.post.push(...config.transforms.post);
-      }
-    }
-
-    if (config.preTransforms && config.preTransforms instanceof Array) {
-      this.transformators.pre.push(...config.preTransforms);
-    }
-
-    if (config.postTransforms && config.postTransforms instanceof Array) {
-      this.transformators.pre.push(...config.postTransforms);
-    }
+    this.transformators = mergeTransforms(config, this);
 
     /**
      * @type {function.<boolean>[]}
