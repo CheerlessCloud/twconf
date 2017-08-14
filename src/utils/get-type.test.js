@@ -11,7 +11,15 @@ describe('to map converter', () => {
     expect(type).to.be.instanceof(Types.ConfigFieldBaseType);
   });
 
-  it('get type by name in "config.type" object', () => {
+  it('get type when in "config.type" instanceof BaseType', () => {
+    expect(
+      getType({
+        type: new Types.StringType(),
+      }),
+    ).to.be.instanceof(Types.ConfigFieldBaseType);
+  });
+
+  it('get type by name from "config.type" object', () => {
     const type = getType({
       type: {
         name: 'number',
@@ -24,11 +32,19 @@ describe('to map converter', () => {
     expect(type.applyValidators(2)).to.be.equal(false);
   });
 
-  it('throw exeption on empty argument', () => {
+  it('throw exception on get type by name from "config.type" object', () => {
+    expect(() => getType({
+      type: {
+        name: 'unknownType',
+      },
+    })).to.be.throw('Unknown type');
+  });
+
+  it('throw exception on empty argument', () => {
     expect(() => getType()).to.throw('Type of field must be string, object or object extend from ConfigFieldBaseType');
   });
 
-  it('throw exeption on unknown time', () => {
+  it('throw exception on unknown type', () => {
     expect(() => getType({ type: 'unknown' })).to.throw('Unknown type');
   });
 });
