@@ -137,6 +137,7 @@
     "dist/**/*.*"
   ],
   "dependencies": {
-    "babel-polyfill": "^7.0.0-alpha.19"
+    "babel-polyfill": "^7.0.0-alpha.19",
+    "eerror": "^0.2.0"
   }
 }
