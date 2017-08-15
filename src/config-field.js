@@ -74,21 +74,22 @@ class ConfigField {
    * @returns {any} - Value after transformations.
    */
   validate(value) {
-    let newValue;
+    let newValue = value;
 
-    if ((value === undefined || value === null)) {
+    if ((newValue === undefined || newValue === null)) {
       if (this.required) {
         throw new EError('This field is required', this);
       }
 
       newValue = this.default;
-    }
-
-    if (!(value === undefined || value === null)) {
+    } else {
       try {
-        newValue = this.applyPreTransforms(value);
+        newValue = this.applyPreTransforms(newValue);
       } catch (err) {
-        throw new EError('Can\'t apply pre-transform to value', this, { error: err });
+        throw new EError('Can\'t apply pre-transforms to value', {
+          rule: this,
+          error: err,
+        });
       }
     }
 
