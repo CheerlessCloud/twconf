@@ -59,7 +59,7 @@ new TwConf({
 });
 ```
 
-Available types:
+#### Available types:
 - **Boolean**
   - no options
 - **Float**
@@ -78,3 +78,9 @@ Available types:
   - *minLength*: *number* - mininal length of string
   - *maxLength*: *number* - maximum length of string
   - *allowed*: *Array.<(string|RegExp)>* - allowed values of this field
+
+#### Roadmap
+- [x] Add a typification by string
+- [x] Add a typification by object with options and name
+- [ ] Increase the percentage of code coverage
+- [ ] Fix incorrect throwing invalid values
