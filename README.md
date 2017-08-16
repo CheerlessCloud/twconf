@@ -4,10 +4,10 @@
 [![codestyle](https://img.shields.io/badge/codestyle-airbnb-brightgreen.svg?style=flat-square)](https://github.com/airbnb/javascript)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-[![Travis](https://img.shields.io/travis/TeslaCtroitel/twconf.svg?style=flat-square)](https://travis-ci.org/TeslaCtroitel/twconf)
-[![dependencies Status](https://david-dm.org/TeslaCtroitel/twconf/status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf)
-[![devDependencies Status](https://david-dm.org/TeslaCtroitel/twconf/dev-status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
-[![Coverage Status](https://img.shields.io/coveralls/TeslaCtroitel/twconf.svg?style=flat-square)](https://coveralls.io/github/TeslaCtroitel/twconf)
+[![Travis](https://img.shields.io/travis/CheerlessCloud/twconf.svg?style=flat-square)](https://travis-ci.org/TeslaCtroitel/twconf)
+[![dependencies Status](https://david-dm.org/CheerlessCloud/twconf/status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf)
+[![devDependencies Status](https://david-dm.org/CheerlessCloud/twconf/dev-status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
+[![Coverage Status](https://img.shields.io/coveralls/CheerlessCloud/twconf.svg?style=flat-square)](https://coveralls.io/github/TeslaCtroitel/twconf)
 
 [![Sponsor](https://app.codesponsor.io/embed/jkPpzosXxwDBBaBNpoqWKCXd/TeslaCtroitel/twconf.svg)](https://app.codesponsor.io/link/jkPpzosXxwDBBaBNpoqWKCXd/TeslaCtroitel/twconf)
 
@@ -84,3 +84,5 @@ new TwConf({
 - [x] Add a typification by object with options and name
 - [ ] Increase the percentage of code coverage
 - [ ] Fix incorrect throwing invalid values
+- [ ] Add typescript definitions
+- [ ] Migrate tests to Ava
