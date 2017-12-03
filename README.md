@@ -9,8 +9,6 @@
 [![devDependencies Status](https://david-dm.org/CheerlessCloud/twconf/dev-status.svg?style=flat-square)](https://david-dm.org/TeslaCtroitel/twconf?type=dev)
 [![Coverage Status](https://img.shields.io/coveralls/CheerlessCloud/twconf.svg?style=flat-square)](https://coveralls.io/github/TeslaCtroitel/twconf)
 
-[![Sponsor](https://app.codesponsor.io/embed/jkPpzosXxwDBBaBNpoqWKCXd/CheerlessCloud/twconf.svg)](https://app.codesponsor.io/link/jkPpzosXxwDBBaBNpoqWKCXd/CheerlessCloud/twconf)
-
 **Attention: this is beta version. Use it in production with caution.**
 
 NodeJS module for strictly configuration from environment variables.
