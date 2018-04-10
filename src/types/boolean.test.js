@@ -36,5 +36,11 @@ describe('boolean type', () => {
     booleanType.transformators.post.map(fn => expect(fn('false')).to.be.false);
     booleanType.transformators.post.map(fn => expect(fn('FALSE')).to.be.false);
     booleanType.transformators.post.map(fn => expect(fn('0')).to.be.false);
+
+    booleanType.transformators.post.map(fn => expect(fn(true)).to.be.true);
+    booleanType.transformators.post.map(fn => expect(fn(1)).to.be.true);
+    booleanType.transformators.post.map(fn => expect(fn(false)).to.be.false);
+    booleanType.transformators.post.map(fn => expect(fn(0)).to.be.false);
+    booleanType.transformators.post.map(fn => expect(fn({})).to.be.false);
   });
 });

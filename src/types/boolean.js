@@ -16,7 +16,7 @@ class BooleanType extends ConfigFieldBaseType {
         ['true', 'false', '1', '0'].includes(val.toLowerCase());
     });
 
-    this.transformators.post.push(val => ['true', '1'].includes(val.toLowerCase()));
+    this.transformators.post.push(val => ['true', '1'].includes(`${val}`.toLowerCase()));
   }
 }
 
