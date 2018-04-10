@@ -15,7 +15,7 @@
     "plugabble"
   ],
   "scripts": {
-    "test": "mocha --recursive --check-leaks --compilers js:babel-register src/**/*.test.js src/*.test.js",
+    "test": "mocha --recursive --check-leaks --require babel-register src/**/*.test.js src/*.test.js",
     "test:dev": "npm t -- -w",
     "cover": "nyc npm t",
     "postcover": "nyc report --reporter=html --reporter=lcov",
