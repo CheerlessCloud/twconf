@@ -50,7 +50,7 @@ class TwConf {
   }
 
   /**
-   * @param {boolean} [beautify=true] - Sould beautify string.
+   * @param {boolean} [beautify=true] - Should beautify string.
    * @returns {string} - JSON version of config.
    */
   toString(beautify = true) {
@@ -111,7 +111,7 @@ class TwConf {
         configField.splitter(validatedValue, key, this.env)
           .forEach((newValue, newKey) => this.config.set(newKey, newValue));
       } catch (err) {
-        errors.push(err);
+        errors.push(EError.wrap(err).combine({ configField, key, value: this.env.get(key) }));
       }
     });
 
