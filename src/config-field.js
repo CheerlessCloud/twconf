@@ -78,7 +78,7 @@ class ConfigField {
 
     if ((newValue === undefined || newValue === null)) {
       if (this.required) {
-        throw new EError('This field is required', this);
+        throw new EError('This field is required').combine({ rule: this });
       }
 
       newValue = this.default;
@@ -86,7 +86,7 @@ class ConfigField {
       try {
         newValue = this.applyPreTransforms(newValue);
       } catch (err) {
-        throw new EError('Can\'t apply pre-transforms to value', {
+        throw new EError('Can\'t apply pre-transforms to value').combine({
           rule: this,
           error: err,
         });
@@ -94,13 +94,13 @@ class ConfigField {
     }
 
     if (!this.applyValidators(newValue)) {
-      throw new EError('Invalid value', this);
+      throw new EError('Invalid value').combine({ rule: this });
     }
 
     try {
       newValue = this.applyPostTransforms(newValue);
     } catch (err) {
-      throw new EError('Can\'t apply post-transforms to value', this, { error: err });
+      throw new EError('Can\'t apply post-transforms to value').combine({ rule: this, error: err });
     }
 
     return newValue;

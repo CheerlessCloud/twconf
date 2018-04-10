@@ -150,6 +150,6 @@
   ],
   "dependencies": {
     "babel-polyfill": "^7.0.0-alpha.19",
-    "eerror": "^0.2.0"
+    "eerror": "^2.0.0"
   }
 }

@@ -84,9 +84,7 @@ class TwConf {
     this.skeleton.forEach((value, key) => {
       if (!(value instanceof ConfigField)) {
         if (typeof value !== 'object') {
-          throw new EError('Config rule must be an object', {
-            field: key,
-          });
+          throw new EError('Config rule must be an object').combine({ field: key });
         }
 
         this.skeleton.set(key, new ConfigField({ ...value, name: key }));
@@ -118,7 +116,7 @@ class TwConf {
     });
 
     if (errors.length) {
-      throw new EError('Validation errors', { errors });
+      throw new EError('Validation errors').combine({ errors });
     }
   }
 }

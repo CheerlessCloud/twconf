@@ -18,7 +18,7 @@ function getType(config = {}) {
     const CurrentType = types.get(config.type);
 
     if (!CurrentType) {
-      throw new EError('Unknown type', { typeName: config.type });
+      throw new EError('Unknown type').combine({ typeName: config.type });
     }
 
     return new CurrentType(config);
@@ -31,15 +31,14 @@ function getType(config = {}) {
     const CurrentType = types.get(typename.toLowerCase());
 
     if (!CurrentType) {
-      throw new EError('Unknown type', { typeName: typename });
+      throw new EError('Unknown type').combine({ typeName: typename });
     }
 
     return new CurrentType({ ...config, ...config.type });
   }
 
-  throw new EError('Type of field must be string, object or object extend from ConfigFieldBaseType', {
-    fieldName: config.name,
-  });
+  throw new EError('Type of field must be string, object or object extend from ConfigFieldBaseType')
+    .combine({ fieldName: config.name });
 }
 
 export default getType;

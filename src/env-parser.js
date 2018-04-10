@@ -12,7 +12,7 @@ function envParse({ flatOnly = false, env = process.env } = {}) {
   return new Map(Object.entries(env)
     .map(([key, value]) => {
       if (!key.match(flatOnly ? flatOnlyFieldName : normalFieldName)) {
-        throw new EError('Unsupported env field name', { name: key });
+        throw new EError('Unsupported env field name').combine({ name: key });
       }
 
       const newKey = key.toLowerCase()
