@@ -36,7 +36,7 @@
     "babel-preset-stage-0": "^7.0.0-alpha.19",
     "babel-register": "^7.0.0-alpha.19",
     "chai": "^4.0.2",
-    "commitizen": "^2.9.6",
+    "commitizen": "^3.0.5",
     "coveralls": "^2.13.1",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
